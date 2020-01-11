@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+   <link rel="stylesheet" href="./css/xuanran.css">
+</head>
+
+<body>
+    <div class="box">
+        <ul class="list"></ul>
+    </div>
+    <script src="./js/data.js"></script>
+    <script>
+        /* 分析标签的结构，获取所有需要处理的标签 */
+            var lis = document.getElementsByClassName("J-brand-item-page");
+            /* 初始化数组，准备接收数据 */
+            var data = new Array();
+            /* 开启循环，每循环一次就获取当前标签 */
+            for (var i = 0, len = lis.length; i < len; i++) {
+                var ele = lis[i];
+                var s = ele.getElementsByTagName("img")[0].src,
+                    t = ele.getElementsByClassName("brand-name")[0].innerText,
+                    p = ele.getElementsByClassName("brand-discount")[0].innerText,
+                    // l = ele.getElementsByClassName("pms-info")[0].innerText;
+
+                var pdd = {};
+                pdd.s = s;
+                pdd.t = t;
+                pdd.p = p;
+                // pdd.l = l;
+                data.push(pdd);
+            }
+
+            console.log(JSON.stringify(data));
+
+        /* 获取页面中的ul标签 */
+        var oUl = document.getElementsByClassName("list")[0];
+
+        /* 数据渲染 */
+        var res = books.map(function (item, index) {
+            var html = `<li class="list-item">
+                <img src=${item.src}   alt="" title=${item.title}>
+                <div class="item-price">${item.price}</div>
+                <div class="item-link">${item.link}</div>
+              </li>`
+            return html;
+        }).join("");
+
+        oUl.innerHTML = res;
+    </script>
+</body>
+
+</html>
